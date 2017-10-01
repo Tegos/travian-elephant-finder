@@ -1,9 +1,9 @@
 const config = require('./config');
-const excelbuilder = require('msexcel-builder');
 const rp = require('request-promise');
 const excel = require('excel4node');
-
-let resultOfSearch = [];
+const cheerio = require('cheerio');
+const sleep = require('system-sleep');
+const util = require('./util');
 
 let makeSearchElephant = (x, y) => {
 	let travianServer = config.travianServer;
@@ -40,22 +40,39 @@ worksheet.cell(1, 3).string('Elephant');
 
 
 let rowCounter = 2;
-for (let x = -5; x < 5; x++) {
-	for (let y = -5; y < 5; y++) {
+let animal = config.animal;
+for (let x = config.minMap; x < config.maxMap; x++) {
+	for (let y = config.minMap; y < config.maxMap; y++) {
+
 		makeSearchElephant(x, y).then((r) => {
 
 			let data = r.response.data.html;
-			console.warn(data);
+			let amount = 0;
 
-			worksheet.cell(rowCounter, 1).number(x);
-			worksheet.cell(rowCounter, 2).number(y);
-			worksheet.cell(rowCounter, 3).string(data);
+			const $ = cheerio.load(data);
 
-			rowCounter++;
+			let td = $('img[title="' + animal + '"]');
+			if (td.length) {
+				let tr = td.closest('tr');
+				amount = parseInt(tr.find('.val').text(), 10);
+				console.warn({x, y});
+				console.warn(amount);
+			}
 
-			workbook.write('data/elephant.xlsx');
+			if (amount > 0) {
+				worksheet.cell(rowCounter, 1).number(x);
+				worksheet.cell(rowCounter, 2).number(y);
+				worksheet.cell(rowCounter, 3).number(amount);
+
+				rowCounter++;
+
+				workbook.write('data/elephant.xlsx');
+			}
 
 		});
+
+		sleep(util.randomIntFromInterval(100, 500));
+
 	}
 }
 

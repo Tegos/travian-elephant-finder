@@ -3,7 +3,8 @@ let config = {
 	travianServer: 'https://ts80.travian.com',
 	ajaxToken: '00ab94bb1f26b26f8699e316963f2dee',
 	maxMap: 200,
-	minMap: -200
+	minMap: -200,
+	animal: 'Elephant'
 };
 
 module.exports = config;
