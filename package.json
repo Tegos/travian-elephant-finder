@@ -5,9 +5,13 @@
     "cheerio": "^1.0.0-rc.2",
     "delay": "latest",
     "excel4node": "^1.2.1",
-    "msexcel-builder": "0.0.2",
-    "request": "^2.83.0",
+    "jsonfile": "^4.0.0",
     "request-promise": "^4.2.2",
     "system-sleep": "^1.3.6"
+  },
+  "author": "Myhkavko Ivan",
+  "scripts": {
+    "start": "node app.js",
+    "collect": "node collectOasysPosition.js"
   }
 }
