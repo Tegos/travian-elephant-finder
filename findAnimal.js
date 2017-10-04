@@ -45,15 +45,13 @@ worksheet.cell(1, 3).string('Elephant');
 
 let oasisPositions = jsonfile.readFileSync(config.jsonFileOasis);
 
-oasisPositions.forEach(function (position) {
-	//uniquePosition
-});
 
-uniquePosition.add(oasisPositions);
 
-oasisPositions = uniquePosition.get();
+//uniquePosition.add(oasisPositions);
 
-console.warn(oasisPositions);
+//oasisPositions = uniquePosition.get();
+
+//console.warn(oasisPositions);
 
 oasisPositions.map(function (obj) {
 	let rObj = obj;
@@ -65,44 +63,48 @@ oasisPositions.sort(function (a, b) {
 	return parseFloat(a.distance) - parseFloat(b.distance);
 });
 
-console.log(oasisPositions);
+//console.log(oasisPositions);
+let count = 300;
+oasisPositions = oasisPositions.slice(0, count);
 
+//console.warn(oasisPositions);
+//process.exit(9);
 
 let rowCounter = 2;
 let animal = config.animal;
-for (let x = config.minMap; x < config.maxMap; x++) {
-	for (let y = config.minMap; y < config.maxMap; y++) {
+for (let pos = 0; pos < count; pos++) {
+	let {x, y} = oasisPositions[pos];
 
-		// makeSearchAnimal(x, y).then((r) => {
-		//
-		// 	let data = r.response.data.html;
-		// 	let amount = 0;
-		//
-		// 	const $ = cheerio.load(data);
-		//
-		// 	let td = $('img[title="' + animal + '"]');
-		// 	if (td.length) {
-		// 		let tr = td.closest('tr');
-		// 		amount = parseInt(tr.find('.val').text(), 10);
-		// 		console.warn({x, y});
-		// 		console.warn(amount);
-		// 	}
-		//
-		// 	if (amount > 0) {
-		// 		worksheet.cell(rowCounter, 1).number(x);
-		// 		worksheet.cell(rowCounter, 2).number(y);
-		// 		worksheet.cell(rowCounter, 3).number(amount);
-		//
-		// 		rowCounter++;
-		//
-		// 		workbook.write('data/elephant.xlsx');
-		// 	}
-		//
-		// });
+	makeSearchAnimal(x, y).then((r) => {
 
-		//sleep(util.randomIntFromInterval(100, 500));
+		let data = r.response.data.html;
+		let amount = 0;
 
-	}
+		const $ = cheerio.load(data);
+
+		let td = $('img[title="' + animal + '"]');
+		if (td.length) {
+			let tr = td.closest('tr');
+			amount = parseInt(tr.find('.val').text(), 10);
+			console.warn({x, y});
+			console.warn(amount);
+		}
+
+		if (amount > 0) {
+			worksheet.cell(rowCounter, 1).number(x);
+			worksheet.cell(rowCounter, 2).number(y);
+			worksheet.cell(rowCounter, 3).number(amount);
+
+			rowCounter++;
+
+			workbook.write('data/elephant.xlsx');
+		}
+
+	});
+
+	sleep(util.randomIntFromInterval(200, 1000));
+
+
 }
 
 
