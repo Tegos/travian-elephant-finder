@@ -4,6 +4,7 @@ const excel = require('excel4node');
 const cheerio = require('cheerio');
 const sleep = require('system-sleep');
 const jsonfile = require('jsonfile');
+const nodeUnique = require('node-unique-array');
 
 const util = require('./util');
 
@@ -35,6 +36,8 @@ let makeSearchAnimal = (x, y) => {
 let workbook = new excel.Workbook();
 let worksheet = workbook.addWorksheet('Sheet 1', {});
 
+let uniquePosition = new nodeUnique();
+
 
 worksheet.cell(1, 1).string('x');
 worksheet.cell(1, 2).string('y');
@@ -42,13 +45,23 @@ worksheet.cell(1, 3).string('Elephant');
 
 let oasisPositions = jsonfile.readFileSync(config.jsonFileOasis);
 
+oasisPositions.forEach(function (position) {
+	//uniquePosition
+});
+
+uniquePosition.add(oasisPositions);
+
+oasisPositions = uniquePosition.get();
+
+console.warn(oasisPositions);
+
 oasisPositions.map(function (obj) {
 	let rObj = obj;
 	obj['distance'] = util.distance(obj.x, obj.y, config.startX, config.startY);
 	return rObj;
 });
 
-oasisPositions.sort(function(a, b) {
+oasisPositions.sort(function (a, b) {
 	return parseFloat(a.distance) - parseFloat(b.distance);
 });
 

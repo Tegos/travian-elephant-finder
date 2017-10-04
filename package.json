@@ -6,6 +6,7 @@
     "delay": "latest",
     "excel4node": "^1.2.1",
     "jsonfile": "^4.0.0",
+    "node-unique-array": "0.0.6",
     "request-promise": "^4.2.2",
     "system-sleep": "^1.3.6"
   },

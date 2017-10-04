@@ -1,7 +1,8 @@
 let config = {
-	cookie: 'travian-language=en-US; CAD=2667313037%23%23%23%23%23%23; sess_id=3a0812280355109130554d03281a2162; lowRes=0; T3E=cJu9yo%2BuwO5wTdscW6E0kg%3D%3D%3ALo5Ri0k1yCFHyBVjxqNl8nD%2B%2FLQ0PEQHEYBuAuGCpr%2BwlLAZxYK4di1AlotYqFZquiqbgH%2B%2BlFJEqfZWFdogC%2FdVc2kgOywMZh3HUFtXMZqIsWibyE66FzFy%2FiuQhDbO%3AK36IV7Rp7hVqM%2Fqxi9lULmPZqASMBgW2qCv1wh75s9w%3D; mapId1=%7B%22grid%22%3Atrue%7D',
+	cookie: 'travian-language=en-US; CAD=2667313037%23%23%23%23%23%23; sess_id=a8a0b2911664348b1eb34c9f180498cb; lowRes=0; T3E=%2FuPooPFTfzA6HwyzK%2BmcMQ%3D%3D%3A6y%2Feu1CNCmSrHyDj7wTgzABVpEI6ABgJTVorf5rGwze7a55i4W2t%2BXwpaimD%2FI5MIFvPsnpA7QjpDhDHMCTuXfic4cE00Yr2P1kKY4TT3N0w4zfPu%2FUpVf%2FLOqUvQ9K6%3Ap%2F3Fjogb4%2BHYbzxKKd7WuE%2FfgDINmpLnED42Wi1Vt28%3D; mapId1=%7B%22grid%22%3Atrue%7D',
 	travianServer: 'https://ts80.travian.com',
-	ajaxToken: '8bb8482c0966502c56025db29ec36ce8',
+	ajaxToken: 'e7b76199ce07d2e17e26faf0b23972fc',
+	userAgent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0',
 	maxMap: 200,
 	minMap: -200,
 	animal: 'Elephant',
