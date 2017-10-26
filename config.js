@@ -1,13 +1,13 @@
 let config = {
-	cookie: 'CAD=2667313037%23%23%23%23%23%23; sess_id=71529dc49b66a23208cf46c6181138d8; lowRes=0; travian-language=en-US; T3E=LxtV0DlLQD9Ml1MsY%2BoxPQ%3D%3D%3AfdiOIEBXfqm8KQqRGvcv65mFaJHQ8ZR%2BQk5spfA6%2FEy4Rdn09GVPCZYA6kEPxtI%2F%2Bhoj4yaL68MXFigCZYteC%2FOCHx5jX%2FTjSK9I4ZZbeaoRLng1T0tKETMcEg51UsrF%3AUuYmvwhI7lCr3TREBVoGoOS7z4AiXFlAYH4ZP%2F4WUbA%3D; mapId1=%7B%22grid%22%3Atrue%2C%22outline-expanded%22%3Afalse%2C%22markLayer-player-alliance-expanded%22%3Atrue%2C%22markLayer-player-player-expanded%22%3Afalse%2C%22markLayer-player-flag-expanded%22%3Afalse%2C%22minimap-expanded%22%3Afalse%7D',
+	cookie: 'CAD=2667313037%23%23%23%23%23%23; __gads=ID=08aeab2359ef346a:T=1507789417:S=ALNI_MY1Hdt4Ap0UUvHFqfNvHYCOr8KP3w; travian-language=en-US; sess_id=145d09982e19322a964ac230e78d218c; lowRes=0; T3E=0gpLUfhgsunjQGqgLYooXw%3D%3D%3AArf37Jqtvd1m1ZFFBUj%2FNwa%2FNmcDXFWg1uQoYOBK6lrVm%2BvYQYH36w0m3ZDpq%2B572%2BpcAK3olikR430yDHW3LlBf%2Bs4mJkmSQPsDvGV%2F15hYh5DZB6aBbAnmupx7cNwY%3A3XIHnr941dnaYsAZ53NialP0%2Feg%2FpptBtxPvFpQb%2FCY%3D; mapId1=%7B%22grid%22%3Atrue%7D',
 	travianServer: 'https://ts80.travian.com',
-	ajaxToken: 'b910732b66e78e249821dc5b1bb6067e',
+	ajaxToken: 'cd949288e7f93bb9872dc8a6711ca7a5',
 	userAgent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0',
 	maxMap: 200,
 	minMap: -200,
 	animal: 'Elephant',
 	startX: 21,
-	startY: 48,
+	startY: 47,
 	jsonFileOasis: 'data/oasis.json'
 };
 

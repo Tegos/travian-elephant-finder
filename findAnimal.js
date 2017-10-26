@@ -64,7 +64,7 @@ oasisPositions.sort(function (a, b) {
 });
 
 //console.log(oasisPositions);
-let count = 300;
+let count = 500;
 oasisPositions = oasisPositions.slice(0, count);
 
 //console.warn(oasisPositions);
