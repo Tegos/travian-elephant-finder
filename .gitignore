@@ -110,4 +110,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-/data/
+/data/*
+!/data/oasis.json

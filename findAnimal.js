@@ -42,9 +42,9 @@ let uniquePosition = new nodeUnique();
 worksheet.cell(1, 1).string('x');
 worksheet.cell(1, 2).string('y');
 worksheet.cell(1, 3).string('Elephant');
+worksheet.cell(1, 4).string('Another animal');
 
 let oasisPositions = jsonfile.readFileSync(config.jsonFileOasis);
-
 
 
 //uniquePosition.add(oasisPositions);
@@ -65,13 +65,21 @@ oasisPositions.sort(function (a, b) {
 
 //console.log(oasisPositions);
 let count = 500;
-oasisPositions = oasisPositions.slice(0, count);
+let iteration = 1;
+oasisPositions = oasisPositions.slice(count * (iteration - 1), count * iteration);
 
 //console.warn(oasisPositions);
 //process.exit(9);
 
 let rowCounter = 2;
 let animal = config.animal;
+const date = new Date();
+
+const fileNameAdd = date.toLocaleDateString() + '_' + date.getTime();
+const file = `data/elephant_${fileNameAdd}.xlsx`;
+
+util.createFile(file);
+
 for (let pos = 0; pos < count; pos++) {
 	let {x, y} = oasisPositions[pos];
 
@@ -82,8 +90,13 @@ for (let pos = 0; pos < count; pos++) {
 
 		const $ = cheerio.load(data);
 
-		let td = $('img[title="' + animal + '"]');
+		let table = $('#troop_info').first();
+		let td = table.find('img[title="' + animal + '"]');
+		let trCount = table.find('tr');
+
+		let anotherAnimal = 0;
 		if (td.length) {
+			anotherAnimal = trCount.length - 2;
 			let tr = td.closest('tr');
 			amount = parseInt(tr.find('.val').text(), 10);
 			console.warn({x, y});
@@ -94,12 +107,11 @@ for (let pos = 0; pos < count; pos++) {
 			worksheet.cell(rowCounter, 1).number(x);
 			worksheet.cell(rowCounter, 2).number(y);
 			worksheet.cell(rowCounter, 3).number(amount);
+			worksheet.cell(rowCounter, 4).number(anotherAnimal);
 
 			rowCounter++;
-
-			workbook.write('data/elephant.xlsx');
+			workbook.write(file);
 		}
-
 	});
 
 	sleep(util.randomIntFromInterval(200, 1000));
