@@ -23,6 +23,13 @@ const createFile = (filename) => {
 	});
 };
 
+const addToStringMethod = (object) => {
+	object.toString = () => {
+		return `x:${object.x};y:${object.y}`;
+	};
+};
+
 exports.distance = distance;
 exports.randomIntFromInterval = randomIntFromInterval;
 exports.createFile = createFile;
+exports.addToStringMethod = addToStringMethod;

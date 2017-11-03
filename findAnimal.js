@@ -36,22 +36,41 @@ let makeSearchAnimal = (x, y) => {
 let workbook = new excel.Workbook();
 let worksheet = workbook.addWorksheet('Sheet 1', {});
 
-let uniquePosition = new nodeUnique();
-
 
 worksheet.cell(1, 1).string('x');
 worksheet.cell(1, 2).string('y');
 worksheet.cell(1, 3).string('Elephant');
 worksheet.cell(1, 4).string('Another animal');
+worksheet.cell(1, 5).string('hasCrocodile');
+worksheet.cell(1, 6).string('hasTiger');
+worksheet.cell(1, 7).string('totalAnimal');
 
 let oasisPositions = jsonfile.readFileSync(config.jsonFileOasis);
 
+let oasisPositionsOccupiedArray = jsonfile.readFileSync(config.jsonFileOasisOccupied);
 
-//uniquePosition.add(oasisPositions);
+if (!Array.isArray(oasisPositionsOccupiedArray)) {
+	oasisPositionsOccupiedArray = [];
+}
 
-//oasisPositions = uniquePosition.get();
 
-//console.warn(oasisPositions);
+let uniquePositionOccupied = new nodeUnique();
+
+uniquePositionOccupied.add(oasisPositionsOccupiedArray);
+
+//console.log(uniquePositionOccupied.get().length);
+//console.log(oasisPositions.length);
+//process.exit(909);
+
+// filter for occupied
+oasisPositions = oasisPositions.filter(function (position) {
+	let save = true;
+	if (uniquePositionOccupied.contains(position)) {
+		save = false;
+	}
+	return save;
+});
+
 
 oasisPositions.map(function (obj) {
 	let rObj = obj;
@@ -63,9 +82,11 @@ oasisPositions.sort(function (a, b) {
 	return parseFloat(a.distance) - parseFloat(b.distance);
 });
 
-//console.log(oasisPositions);
-let count = 500;
-let iteration = 1;
+
+let count = 300;
+
+let iteration = 3;
+
 oasisPositions = oasisPositions.slice(count * (iteration - 1), count * iteration);
 
 //console.warn(oasisPositions);
@@ -73,6 +94,8 @@ oasisPositions = oasisPositions.slice(count * (iteration - 1), count * iteration
 
 let rowCounter = 2;
 let animal = config.animal;
+const animalTiger = 'Tiger';
+const animalCrocodile = 'Crocodile';
 const date = new Date();
 
 const fileNameAdd = date.toLocaleDateString() + '_' + date.getTime();
@@ -92,15 +115,26 @@ for (let pos = 0; pos < count; pos++) {
 
 		let table = $('#troop_info').first();
 		let td = table.find('img[title="' + animal + '"]');
+		let hasCrocodile = table.find('img[title="' + animalCrocodile + '"]');
+		let hasTiger = table.find('img[title="' + animalTiger + '"]');
 		let trCount = table.find('tr');
 
 		let anotherAnimal = 0;
+		let totalAnimal = 0;
+
+
 		if (td.length) {
-			anotherAnimal = trCount.length - 2;
+			anotherAnimal = trCount.length - 1;
 			let tr = td.closest('tr');
 			amount = parseInt(tr.find('.val').text(), 10);
 			console.warn({x, y});
 			console.warn(amount);
+
+			const vals = table.find('.val');
+
+			vals.each(function (i, elem) {
+				totalAnimal += parseInt($(this).text(), 10);
+			});
 		}
 
 		if (amount > 0) {
@@ -108,16 +142,32 @@ for (let pos = 0; pos < count; pos++) {
 			worksheet.cell(rowCounter, 2).number(y);
 			worksheet.cell(rowCounter, 3).number(amount);
 			worksheet.cell(rowCounter, 4).number(anotherAnimal);
+			worksheet.cell(rowCounter, 5).number(hasCrocodile.length);
+			worksheet.cell(rowCounter, 6).number(hasTiger.length);
+			worksheet.cell(rowCounter, 7).number(totalAnimal);
 
 			rowCounter++;
 			workbook.write(file);
 		}
+
+		// save occupied
+		const h1 = $('h1').first().text().trim();
+
+		if (!h1.includes('Unoccupied')) {
+			uniquePositionOccupied.add({x, y});
+
+			jsonfile.writeFileSync(config.jsonFileOasisOccupied, uniquePositionOccupied.get());
+		}
+
+
 	});
 
-	sleep(util.randomIntFromInterval(200, 1000));
+	sleep(util.randomIntFromInterval(300, 3000));
 
 
 }
+
+
 
 
 
