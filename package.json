@@ -4,7 +4,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "delay": "latest",
-    "excel4node": "^1.2.1",
+    "excel4node": "^1.6.0",
     "jsonfile": "^4.0.0",
     "node-unique-array": "0.0.6",
     "request-promise": "^4.2.2",
