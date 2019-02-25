@@ -12,8 +12,8 @@
   },
   "author": "Myhkavko Ivan",
   "scripts": {
-    "start": "node app.js",
     "collect": "node collectOasysPosition.js",
-    "find": "node findAnimal.js"
+    "find": "node findAnimal.js",
+    "clean": "node cleanData.js"
   }
 }

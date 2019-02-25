@@ -40,12 +40,7 @@ if (!Array.isArray(oasisPosition)) {
 	oasisPosition = [];
 }
 
-//console.warn(oasisPosition);
-
-//process.exit();
-
 for (let x = config.minMap; x < config.maxMap; x++) {
-//for (let x = 108; x < config.maxMap; x++) {
 	for (let y = config.minMap; y < config.maxMap; y++) {
 
 		makeSearchOasis(x, y).then((r) => {
@@ -63,7 +58,6 @@ for (let x = config.minMap; x < config.maxMap; x++) {
 				console.warn(oasisPosition);
 
 				jsonfile.writeFileSync(config.jsonFileOasis, oasisPosition);
-
 			}
 
 		});

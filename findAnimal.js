@@ -83,9 +83,9 @@ oasisPositions.sort(function (a, b) {
 });
 
 
-let count = 300;
+let count = 400;
 
-let iteration = 3;
+let iteration = 2;
 
 oasisPositions = oasisPositions.slice(count * (iteration - 1), count * iteration);
 
@@ -162,7 +162,7 @@ for (let pos = 0; pos < count; pos++) {
 
 	});
 
-	sleep(util.randomIntFromInterval(300, 3000));
+	sleep(util.randomIntFromInterval(500, 3000));
 
 
 }
