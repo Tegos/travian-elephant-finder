@@ -21,7 +21,6 @@ fs.createWriteStream(config.jsonFileOasisOccupied);
 jsonfile.writeFileSync(config.jsonFileOasis, []);
 jsonfile.writeFileSync(config.jsonFileOasisOccupied, []);
 
-
 console.log(`Directory ${directory} cleaned`);
 
 

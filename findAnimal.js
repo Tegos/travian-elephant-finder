@@ -18,7 +18,6 @@ let makeSearchAnimal = (x, y) => {
 		ajaxToken: config.ajaxToken
 	};
 
-
 	return rp.post(
 		travianServer + '/ajax.php?cmd=viewTileDetails',
 		{
@@ -29,13 +28,10 @@ let makeSearchAnimal = (x, y) => {
 		}
 	);
 
-
 };
-
 
 let workbook = new excel.Workbook();
 let worksheet = workbook.addWorksheet('Sheet 1', {});
-
 
 worksheet.cell(1, 1).string('x');
 worksheet.cell(1, 2).string('y');
@@ -53,14 +49,9 @@ if (!Array.isArray(oasisPositionsOccupiedArray)) {
 	oasisPositionsOccupiedArray = [];
 }
 
-
 let uniquePositionOccupied = new nodeUnique();
 
 uniquePositionOccupied.add(oasisPositionsOccupiedArray);
-
-//console.log(uniquePositionOccupied.get().length);
-//console.log(oasisPositions.length);
-//process.exit(909);
 
 // filter for occupied
 oasisPositions = oasisPositions.filter(function (position) {
@@ -70,7 +61,6 @@ oasisPositions = oasisPositions.filter(function (position) {
 	}
 	return save;
 });
-
 
 oasisPositions.map(function (obj) {
 	let rObj = obj;
@@ -82,15 +72,11 @@ oasisPositions.sort(function (a, b) {
 	return parseFloat(a.distance) - parseFloat(b.distance);
 });
 
-
 let count = 400;
 
 let iteration = 2;
 
 oasisPositions = oasisPositions.slice(count * (iteration - 1), count * iteration);
-
-//console.warn(oasisPositions);
-//process.exit(9);
 
 let rowCounter = 2;
 let animal = config.animal;
@@ -121,7 +107,6 @@ for (let pos = 0; pos < count; pos++) {
 
 		let anotherAnimal = 0;
 		let totalAnimal = 0;
-
 
 		if (td.length) {
 			anotherAnimal = trCount.length - 1;
@@ -159,11 +144,9 @@ for (let pos = 0; pos < count; pos++) {
 			jsonfile.writeFileSync(config.jsonFileOasisOccupied, uniquePositionOccupied.get());
 		}
 
-
 	});
 
-	sleep(util.randomIntFromInterval(500, 3000));
-
+	sleep(util.randomIntFromInterval(config.delayMin, config.delayMax));
 
 }
 

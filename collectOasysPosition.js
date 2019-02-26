@@ -16,7 +16,6 @@ let makeSearchOasis = (x, y) => {
 		ajaxToken: config.ajaxToken
 	};
 
-
 	return rp.post(
 		travianServer + '/ajax.php?cmd=viewTileDetails',
 		{
@@ -30,9 +29,7 @@ let makeSearchOasis = (x, y) => {
 		}
 	);
 
-
 };
-
 
 let oasisPosition = jsonfile.readFileSync(config.jsonFileOasis);
 
@@ -62,7 +59,7 @@ for (let x = config.minMap; x < config.maxMap; x++) {
 
 		});
 
-		sleep(util.randomIntFromInterval(300, 2000));
+		sleep(util.randomIntFromInterval(config.delayMin, config.delayMax));
 	}
 }
 

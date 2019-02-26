@@ -8,6 +8,8 @@ let config = {
 	animal: 'Elephant',
 	startX: 22,
 	startY: 103,
+	delayMin: 100,
+	delayMax: 1500,
 	jsonFileOasis: 'data/oasis.json',
 	jsonFileOasisOccupied: 'data/oasis_Occupied.json'
 };
