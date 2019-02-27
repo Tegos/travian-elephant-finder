@@ -29,7 +29,7 @@ Set correct fields in `config.js`
 
     <img src="public/dev_tools.png" alt="dev_tools"/>
     
-3. Select random request from list (F5 is it’s empty) and copy **ajaxtoken** from request:
+3. Select random request from list (F5 if it’s empty) and copy **ajaxToken** from request:
     
     <img src="public/ajaxToken.png" alt="ajaxToken"/>
     
