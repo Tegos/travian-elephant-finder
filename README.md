@@ -1,27 +1,26 @@
-Travian Animals Finder
-===================
-
-
-The tool for analysis oases (free or occupied) and searching animals (Elephant and etc).
-Tested in **Fire and Sand** and **Legends**.
-
-----------
+# Travian Animals Finder
 
 <img src="public/nature.png" alt="nature"/><br/>
 
+The tool for analysis oases (free or occupied) and searching animals (Elephant and etc).
+
+
+Tested in **Fire and Sand** and **Legends**.
+
+<p align="center">
 <img src="public/fire_and_sand.png" alt="fire_and_sand"/><br/>
-
 <img src="public/legends_logo_black.png" alt="legends_logo_black"/>
+</p>
 
 
--------------
-How to use
--------------
+## How to use
 
-##Config
+## Config
+
 Set correct fields in `config.js` 
 
-###ajaxToken
+### ajaxToken
+
 1. Open map, https://ts6.travian.com/karte.php
 
     <img src="public/map.png" alt="map"/>
@@ -34,21 +33,26 @@ Set correct fields in `config.js`
     
     <img src="public/ajaxToken.png" alt="ajaxToken"/>
     
-###cookie
+### cookie
+
 Copy your cookies from request(like ajaxToken):
 
 <img src="public/cookies.png" alt="cookies"/>
 
-###minMap, maxMap
+### minMap, maxMap
+
 Limit for searching (like part of the map or your coordinates).
 
-###animal
+### animal
+
 Name of searching animal
 
-###startX, startY
+### startX, startY
+
 Position of search (your village or cap, probably), calculate distance (for sorting oases closest to you)
 
-##Start
+## Start
+
 Run command `npm run clean` clean data directory and create files.
 After that run `npm run collect` (collecting oases position) and wait… 
 It will take a lot of time (depends on your config (minMap, maxMap, delayMin, delayMax) etc).
@@ -70,9 +74,9 @@ Result in excel file: `data/elephant_*.xlsx`
 
 <img src="public/result_oasis.png" alt="result_oasis"/>
 
--------------
-Technologies:
--------------
+
+## Technologies:
+
 
  - **JavaScript**;
  - **NodeJS**;
