@@ -39,9 +39,13 @@ Copy your cookies from request(like ajaxToken):
 
 <img src="public/cookies.png" alt="cookies"/>
 
-### minMap, maxMap
+### minX, minY
 
-Limit for searching (like part of the map or your coordinates).
+The Top Left Corner Co-Ordinate of the Map Area to be searched.
+
+### maxX, maxY
+
+The Bottom Right Corner Co-Ordinate of the Map Area to be searched.
 
 ### animal
 

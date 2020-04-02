@@ -37,8 +37,8 @@ if (!Array.isArray(oasisPosition)) {
 	oasisPosition = [];
 }
 
-for (let x = config.minMap; x < config.maxMap; x++) {
-	for (let y = config.minMap; y < config.maxMap; y++) {
+for (let x = config.minX; x < config.maxX; x++) {
+	for (let y = config.minY; y < config.maxY; y++) {
 
 		makeSearchOasis(x, y).then((r) => {
 
