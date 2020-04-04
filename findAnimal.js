@@ -74,7 +74,7 @@ oasisPositions.sort(function (a, b) {
 
 let count = 400;
 
-let iteration = 2;
+let iteration = 1;
 
 oasisPositions = oasisPositions.slice(count * (iteration - 1), count * iteration);
 
@@ -89,7 +89,7 @@ const file = `data/elephant_${fileNameAdd}.xlsx`;
 
 util.createFile(file);
 
-for (let pos = 0; pos < count; pos++) {
+for (let pos = 0; pos < oasisPositions.length; pos++) {
 	let {x, y} = oasisPositions[pos];
 
 	makeSearchAnimal(x, y).then((r) => {

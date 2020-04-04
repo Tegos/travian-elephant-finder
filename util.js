@@ -1,4 +1,6 @@
 const fs = require('fs');
+const path = require('path');
+const mkdirp = require('mkdirp');
 
 const randomIntFromInterval = function randomIntFromInterval(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
@@ -9,6 +11,8 @@ const distance = (x1, y1, x2, y2) => {
 };
 
 const createFile = (filename) => {
+	mkdirp.sync(path.dirname(filename));
+
 	fs.open(filename, 'r', function (err, fd) {
 		if (err) {
 			fs.writeFile(filename, '', function (err) {
