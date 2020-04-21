@@ -55,6 +55,9 @@ Name of searching animal
 
 Position of search (your village or cap, probably), calculate distance (for sorting oases closest to you)
 
+## Install
+Run `yarn install` for installation package dependencies.
+
 ## Start
 
 Run command `npm run clean` clean data directory and create files.

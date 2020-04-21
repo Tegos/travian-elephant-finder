@@ -2,16 +2,16 @@
   "name": "travian-elephant",
   "version": "0.0.1",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
+    "cheerio": "latest",
     "delay": "^4.3.0",
     "excel4node": "^1.6.0",
     "jsonfile": "^4.0.0",
-    "lodash": "^4.17.13",
-    "mkdirp": "^1.0.3",
+    "lodash": "^4",
+    "mkdirp": "latest",
     "node-unique-array": "0.0.6",
-    "request": "^2.88.2",
+    "request": "latest",
     "request-promise": "^4.2.2",
-    "system-sleep": "^1.3.6"
+    "system-sleep": "latest"
   },
   "author": "Myhkavko Ivan",
   "scripts": {
