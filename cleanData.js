@@ -8,18 +8,20 @@ const directory = 'data';
 fs.readdir(directory, (err, files) => {
 	if (err) throw err;
 
+	files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
+
 	for (const file of files) {
 		fs.unlink(path.join(directory, file), err => {
 			if (err) throw err;
 		});
 	}
+
+	fs.createWriteStream(config.jsonFileOasis);
+	fs.createWriteStream(config.jsonFileOasisOccupied);
+
+	jsonfile.writeFileSync(config.jsonFileOasis, []);
+	jsonfile.writeFileSync(config.jsonFileOasisOccupied, []);
 });
-
-fs.createWriteStream(config.jsonFileOasis);
-fs.createWriteStream(config.jsonFileOasisOccupied);
-
-jsonfile.writeFileSync(config.jsonFileOasis, []);
-jsonfile.writeFileSync(config.jsonFileOasisOccupied, []);
 
 console.log(`Directory ${directory} cleaned`);
 
