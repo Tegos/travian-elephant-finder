@@ -17,6 +17,13 @@
   "scripts": {
     "collect": "node collectOasysPosition.js",
     "find": "node findAnimal.js",
-    "clean": "node cleanData.js"
+    "clean": "node cleanData.js",
+    "lint": "eslint --fix --ext .js .",
+    "test": "echo \"No test specified\""
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
   }
 }

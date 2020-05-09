@@ -3,37 +3,28 @@ const path = require('path');
 const mkdirp = require('mkdirp');
 
 const randomIntFromInterval = function randomIntFromInterval(min, max) {
-	return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const distance = (x1, y1, x2, y2) => {
-	return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2))
-};
+const distance = (x1, y1, x2, y2) => Math.sqrt(((x1 - x2) ** 2) + ((y1 - y2) ** 2));
 
 const createFile = (filename) => {
-	mkdirp.sync(path.dirname(filename));
+  mkdirp.sync(path.dirname(filename));
 
-	fs.open(filename, 'r', function (err, fd) {
-		if (err) {
-			fs.writeFile(filename, '', function (err) {
-				if (err) {
-					console.log(err);
-				}
-				console.log("The file was saved!");
-			});
-		} else {
-			console.log("The file exists!");
-		}
-	});
-};
-
-const addToStringMethod = (object) => {
-	object.toString = () => {
-		return `x:${object.x};y:${object.y}`;
-	};
+  fs.open(filename, 'r', (openErr) => {
+    if (openErr) {
+      fs.writeFile(filename, '', (err) => {
+        if (err) {
+          console.log(err);
+        }
+        console.log('The file was saved!');
+      });
+    } else {
+      console.log('The file exists!');
+    }
+  });
 };
 
 exports.distance = distance;
 exports.randomIntFromInterval = randomIntFromInterval;
 exports.createFile = createFile;
-exports.addToStringMethod = addToStringMethod;

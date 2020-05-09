@@ -1,75 +1,60 @@
-const config = require('./config');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
 const sleep = require('system-sleep');
 const jsonfile = require('jsonfile');
+const config = require('./config');
 
 const util = require('./util');
 
-let makeSearchOasis = (x, y) => {
-	let travianServer = config.travianServer;
+const makeSearchOasis = (x, y) => {
+  const { travianServer } = config;
 
-	let sendData = {
-		cmd: 'viewTileDetails',
-		x: x,
-		y: y,
-		ajaxToken: config.ajaxToken
-	};
+  const sendData = {
+    cmd: 'viewTileDetails',
+    x,
+    y,
+    ajaxToken: config.ajaxToken,
+  };
 
-	return rp.post(
-		travianServer + '/ajax.php?cmd=viewTileDetails',
-		{
-			json: true,
-			method: 'POST',
-			form: sendData,
-			headers: {
-				'cookie': config.cookie,
-				'User-Agent': config.userAgent
-			},
-		}
-	);
-
+  return rp.post(
+    `${travianServer}/ajax.php?cmd=viewTileDetails`,
+    {
+      json: true,
+      method: 'POST',
+      form: sendData,
+      headers: {
+        cookie: config.cookie,
+        'User-Agent': config.userAgent,
+      },
+    },
+  );
 };
 
 let oasisPosition = jsonfile.readFileSync(config.jsonFileOasis);
 
 if (!Array.isArray(oasisPosition)) {
-	oasisPosition = [];
+  oasisPosition = [];
 }
 
 for (let x = config.minX; x < config.maxX; x++) {
-	for (let y = config.minY; y < config.maxY; y++) {
+  for (let y = config.minY; y < config.maxY; y++) {
+    makeSearchOasis(x, y).then((r) => {
+      const data = r.response.data.html;
 
-		makeSearchOasis(x, y).then((r) => {
+      const $ = cheerio.load(data);
 
-			let data = r.response.data.html;
+      const tileDetails = $('#tileDetails');
+      const className = tileDetails.attr('class');
+      if (className.includes('oasis')) {
+        oasisPosition.push({
+          x, y,
+        });
+        console.warn(oasisPosition);
 
-			const $ = cheerio.load(data);
+        jsonfile.writeFileSync(config.jsonFileOasis, oasisPosition);
+      }
+    });
 
-			let tileDetails = $('#tileDetails');
-			let className = tileDetails.attr('class');
-			if (className.includes('oasis')) {
-				oasisPosition.push({
-					x, y
-				});
-				console.warn(oasisPosition);
-
-				jsonfile.writeFileSync(config.jsonFileOasis, oasisPosition);
-			}
-
-		});
-
-		sleep(util.randomIntFromInterval(config.delayMin, config.delayMax));
-	}
+    sleep(util.randomIntFromInterval(config.delayMin, config.delayMax));
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
