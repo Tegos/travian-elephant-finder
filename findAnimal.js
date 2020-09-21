@@ -1,33 +1,11 @@
-const rp = require('request-promise');
 const excel = require('excel4node');
 const cheerio = require('cheerio');
 const sleep = require('system-sleep');
 const jsonfile = require('jsonfile');
 const NodeUnique = require('node-unique-array');
 const config = require('./config');
-
 const util = require('./util');
-
-const makeSearchAnimal = (x, y) => {
-  const { travianServer } = config;
-
-  const sendData = {
-    cmd: 'viewTileDetails',
-    x,
-    y,
-    ajaxToken: config.ajaxToken,
-  };
-
-  return rp.post(
-    `${travianServer}/ajax.php?cmd=viewTileDetails`,
-    {
-      json: true,
-      method: 'POST',
-      form: sendData,
-      headers: { cookie: config.cookie },
-    },
-  );
-};
+const travian = require('./travian');
 
 const workbook = new excel.Workbook();
 const worksheet = workbook.addWorksheet('Sheet 1', {});
@@ -96,9 +74,9 @@ util.createFile(file);
 for (let pos = 0; pos < oasisPositions.length; pos++) {
   const { x, y } = oasisPositions[pos];
 
-  makeSearchAnimal(x, y)
+  travian.viewTileDetails(x, y)
     .then((r) => {
-      const data = r.response.data.html;
+      const data = r.html;
       let amount = 0;
 
       const $ = cheerio.load(data);
@@ -122,13 +100,14 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
           x,
           y,
         });
-        console.warn(amount);
+        // console.warn(amount);
 
-        const vals = table.find('.val');
+        const vals = table.find('td.val');
 
-        vals.each(() => {
-          totalAnimal += parseInt($(this)
-            .text(), 10);
+        vals.each(function () {
+          const val = parseInt($(this)
+            .text());
+          totalAnimal += val;
         });
       }
 
@@ -165,6 +144,10 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
         });
         jsonfile.writeFileSync(config.jsonFileOasisOccupied, uniquePositionOccupied.get());
       }
+    })
+    .catch((err) => {
+      console.warn(err);
+      process.exit(1);
     });
 
   sleep(util.randomIntFromInterval(config.delayMin, config.delayMax));

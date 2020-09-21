@@ -5,11 +5,12 @@
 The tool for analysis oases (free or occupied) and searching animals (Elephant and etc).
 
 
-Tested in **Fire and Sand** and **Legends**.
+Tested in **Shadow Empires**, **Fire and Sand** and **Legends**.
 
 <p align="center">
 <img src="public/fire_and_sand.png" alt="fire_and_sand"/><br/>
 <img src="public/legends_logo_black.png" alt="legends_logo_black"/>
+<img src="public/shadow_empires_logo.png" alt="legends_logo_black"/>
 </p>
 
 
@@ -19,7 +20,7 @@ Tested in **Fire and Sand** and **Legends**.
 
 Set correct fields in `config.js` 
 
-### ajaxToken
+### authorization
 
 1. Open map, https://ts6.travian.com/karte.php
 
@@ -29,9 +30,9 @@ Set correct fields in `config.js`
 
     <img src="public/dev_tools.png" alt="dev_tools"/>
     
-3. Select random request from list (F5 if it’s empty) and copy **ajaxToken** from request:
+3. Select random request from list (F5 if it’s empty) and copy **authorization** from request:
     
-    <img src="public/ajaxToken.png" alt="ajaxToken"/>
+    <img src="public/authorization.png" alt="authorization"/>
     
 ### cookie
 
