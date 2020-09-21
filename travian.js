@@ -2,8 +2,8 @@ const rp = require('request-promise');
 const util = require('./util');
 const config = require('./config');
 
-const Travian = function () {
-  this.viewTileDetails = function (x, y) {
+const Travian = function Travian() {
+  this.viewTileDetails = function viewTileDetails(x, y) {
     const sendData = {
       x,
       y,

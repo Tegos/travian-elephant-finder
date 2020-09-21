@@ -104,9 +104,9 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
 
         const vals = table.find('td.val');
 
-        vals.each(function () {
+        vals.each(function valsEach() {
           const val = parseInt($(this)
-            .text());
+            .text(), 10);
           totalAnimal += val;
         });
       }

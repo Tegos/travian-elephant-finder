@@ -26,9 +26,7 @@ const createFile = (filename) => {
   });
 };
 
-const getApiUrl = function () {
-  return `${config.travianServer}/api/v1`;
-};
+const getApiUrl = () => `${config.travianServer}/api/v1`;
 
 exports.distance = distance;
 exports.randomIntFromInterval = randomIntFromInterval;
