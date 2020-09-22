@@ -54,16 +54,8 @@ oasisPositions.map((obj) => {
 
 oasisPositions.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
 
-const count = 400;
-
-const iteration = 1;
-
-oasisPositions = oasisPositions.slice(count * (iteration - 1), count * iteration);
-
 let rowCounter = 2;
-const { animal } = config;
-const animalTiger = 'Tiger';
-const animalCrocodile = 'Crocodile';
+
 const date = new Date();
 
 const fileNameAdd = `${date.toLocaleDateString()}_${date.getTime()}`;
@@ -83,9 +75,10 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
 
       const table = $('#troop_info')
         .first();
-      const td = table.find(`img[title="${animal}"]`);
-      const hasCrocodile = table.find(`img[title="${animalCrocodile}"]`);
-      const hasTiger = table.find(`img[title="${animalTiger}"]`);
+
+      const td = table.find(`img.${travian.animals.Elephants}`);
+      const hasCrocodile = table.find(`img.${travian.animals.Crocodiles}`);
+      const hasTiger = table.find(`img.${travian.animals.Tigers}`);
       const trCount = table.find('tr');
 
       let anotherAnimal = 0;
@@ -96,11 +89,11 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
         const tr = td.closest('tr');
         amount = parseInt(tr.find('.val')
           .text(), 10);
+
         console.warn({
           x,
           y,
         });
-        // console.warn(amount);
 
         const vals = table.find('td.val');
 
@@ -137,7 +130,8 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
         .text()
         .trim();
 
-      if (!h1.includes('Unoccupied')) {
+      // todo unify condition, need to test
+      if (!h1.includes('Unoccupied') && !h1.includes('Свободный')) {
         uniquePositionOccupied.add({
           x,
           y,
@@ -152,3 +146,5 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
 
   sleep(util.randomIntFromInterval(config.delayMin, config.delayMax));
 }
+
+console.log(`${oasisPositions.length} oases processed`);

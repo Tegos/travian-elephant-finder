@@ -36,7 +36,7 @@ Set correct fields in `config.js`
     
 ### cookie
 
-Copy your cookies from request(like ajaxToken):
+Copy your cookies from request(like authorization):
 
 <img src="public/cookies.png" alt="cookies"/>
 
@@ -48,13 +48,11 @@ The Top Left Corner Co-Ordinate of the Map Area to be searched.
 
 The Bottom Right Corner Co-Ordinate of the Map Area to be searched.
 
-### animal
-
-Name of searching animal
-
 ### startX, startY
 
 Position of search (your village or cap, probably), calculate distance (for sorting oases closest to you)
+
+<img src="public/map_min_max.png" alt="map_min_max"/>
 
 ## Install
 Run `yarn install` for installation package dependencies.

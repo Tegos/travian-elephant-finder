@@ -11,11 +11,18 @@ if (!Array.isArray(oasisPosition)) {
   oasisPosition = [];
 }
 
-for (let x = config.minX; x < config.maxX; x++) {
-  for (let y = config.minY; y < config.maxY; y++) {
+const startX = Math.min(config.minX, config.maxX);
+const endX = Math.max(config.minX, config.maxX);
+
+const startY = Math.min(config.minY, config.maxY);
+const endY = Math.max(config.minY, config.maxY);
+
+for (let x = startX; x < endX; x++) {
+  for (let y = startY; y < endY; y++) {
     travian.viewTileDetails(x, y)
       .then((r) => {
         const data = r.html;
+
         const $ = cheerio.load(data);
 
         const tileDetails = $('#tileDetails');
@@ -25,7 +32,6 @@ for (let x = config.minX; x < config.maxX; x++) {
             x,
             y,
           });
-          console.warn(oasisPosition);
 
           jsonfile.writeFileSync(config.jsonFileOasis, oasisPosition);
         }

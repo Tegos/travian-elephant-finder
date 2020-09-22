@@ -3,6 +3,17 @@ const util = require('./util');
 const config = require('./config');
 
 const Travian = function Travian() {
+  this.animals = {
+    Rats: 'u31',
+    Spiders: 'u32',
+    Snakes: 'u33',
+    Bats: 'u34',
+    Bears: 'u37',
+    Crocodiles: 'u38',
+    Tigers: 'u39',
+    Elephants: 'u40',
+  };
+
   this.viewTileDetails = function viewTileDetails(x, y) {
     const sendData = {
       x,
