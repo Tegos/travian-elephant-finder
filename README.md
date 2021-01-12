@@ -14,6 +14,15 @@ Tested in **Shadow Empires**, **Fire and Sand** and **Legends**.
 </p>
 
 
+## Feature: Using login/password instead cookies
+
+This feature will allow add new functionality such token renew etc.
+
+Do you agree?
+
+[![](https://api.gh-polls.com/poll/01EVTTCW09G0WD12P949RQ9ANX/Yes)](https://api.gh-polls.com/poll/01EVTTCW09G0WD12P949RQ9ANX/Yes/vote)
+[![](https://api.gh-polls.com/poll/01EVTTCW09G0WD12P949RQ9ANX/No)](https://api.gh-polls.com/poll/01EVTTCW09G0WD12P949RQ9ANX/No/vote)
+
 ## How to use
 
 ## Config
