@@ -1,17 +1,20 @@
 const cheerio = require('cheerio');
 const sleep = require('system-sleep');
 const jsonfile = require('jsonfile');
-const config = require('./config');
-const util = require('./util');
-const travian = require('./travian');
+const config = require('~src/config');
+const util = require('~src/services/util');
+const travian = require('~src/services/travian');
 
-let oasisPosition = jsonfile.readFileSync(config.jsonFileOasis);
+let oasisPosition = jsonfile.readFileSync(config.jsonFile.oasis);
 
 if (!Array.isArray(oasisPosition)) {
   oasisPosition = [];
 }
 
-const startX = Math.min(config.minX, config.maxX);
+console.log(config);
+process.exit();
+
+const startX = Math.min(config.coordinates.minX, config.coordinates.maxX);
 const endX = Math.max(config.minX, config.maxX);
 
 const startY = Math.min(config.minY, config.maxY);

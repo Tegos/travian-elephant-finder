@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const config = require('./config');
 
 const randomIntFromInterval = function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -26,9 +25,6 @@ const createFile = (filename) => {
   });
 };
 
-const getApiUrl = () => `${config.travianServer}/api/v1`;
-
 exports.distance = distance;
 exports.randomIntFromInterval = randomIntFromInterval;
 exports.createFile = createFile;
-exports.getApiUrl = getApiUrl;

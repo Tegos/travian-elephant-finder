@@ -1,6 +1,5 @@
 const rp = require('request-promise');
-const util = require('./util');
-const config = require('/src/config');
+const config = require('~src/config');
 
 const Travian = function Travian() {
   this.animals = {
@@ -14,6 +13,10 @@ const Travian = function Travian() {
     Elephants: 'u40',
   };
 
+  this.getApiUrl = function viewTileDetails() {
+    return `${config.travian.server}/api/v1`;
+  };
+
   this.viewTileDetails = function viewTileDetails(x, y) {
     const sendData = {
       x,
@@ -21,7 +24,7 @@ const Travian = function Travian() {
     };
 
     return rp.post(
-      `${util.getApiUrl()}/ajax/viewTileDetails`,
+      `${this.getApiUrl()}/ajax/viewTileDetails`,
       {
         json: true,
         method: 'POST',
