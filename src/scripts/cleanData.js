@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const jsonfile = require('jsonfile');
-const config = require('./config');
+const config = require('~src/config');
+
+
 
 const directory = 'data';
 

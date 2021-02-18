@@ -1,6 +1,6 @@
 const rp = require('request-promise');
 const util = require('./util');
-const config = require('./config');
+const config = require('/src/config');
 
 const Travian = function Travian() {
   this.animals = {

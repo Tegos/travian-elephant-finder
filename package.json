@@ -4,6 +4,7 @@
   "dependencies": {
     "cheerio": "latest",
     "delay": "^4.3.0",
+    "dotenv": "^8.2.0",
     "excel4node": "^1.6.0",
     "jsonfile": "^4.0.0",
     "lodash": "^4",
@@ -15,15 +16,21 @@
   },
   "author": "Myhkavko Ivan",
   "scripts": {
-    "collect": "node collectOasysPosition.js",
-    "find": "node findAnimal.js",
-    "clean": "node cleanData.js",
-    "lint": "eslint --fix --ext .js .",
-    "test": "echo \"No test specified\""
+    "collect": "node src/scripts/collectOasysPosition.js",
+    "find": "node src/scripts/findAnimal.js",
+    "clean": "node src/scripts/cleanData.js",
+    "lint": "eslint --fix --ext .js src/",
+    "test": "echo \"No test specified\"",
+    "postinstall": "link-module-alias"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint-plugin-import": "^2.20.2",
+    "link-module-alias": "^1.2.0"
+  },
+  "_moduleAliases": {
+    "~root": ".",
+    "~src": "src/"
   }
 }

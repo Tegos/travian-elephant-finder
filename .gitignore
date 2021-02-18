@@ -113,3 +113,5 @@ fabric.properties
 !/data/.gitkeep
 /data/*
 .idea
+
+src/config/cookie.txt
