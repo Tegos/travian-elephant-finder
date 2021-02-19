@@ -1,11 +1,13 @@
 const dotenv = require('dotenv');
 const fs = require('fs');
+const dot = require('dot-object');
 
 dotenv.config();
 
 const token = String(fs.readFileSync('src/config/token.txt'));
 
-module.exports = {
+
+const config = {
   authorization: {
     cookie: String(fs.readFileSync('src/config/cookie.txt')),
     token,
@@ -28,8 +30,8 @@ module.exports = {
   },
 
   delay: {
-    min: process.env.DELAY_MIN,
-    max: process.env.DELAY_MAX,
+    min: process.env.DELAY_MIN && 1000,
+    max: process.env.DELAY_MAX && 1500,
   },
 
   jsonFile: {
@@ -37,3 +39,9 @@ module.exports = {
     oasisOccupied: 'data/oasis-occupied.json',
   },
 };
+
+config.get = function (option) {
+  return dot.pick(option, this);
+};
+
+module.exports = config;

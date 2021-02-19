@@ -37,6 +37,27 @@ const Travian = function Travian() {
       },
     );
   };
+
+  this.refreshToken = function viewTileDetails(x, y) {
+    const sendData = {
+      x,
+      y,
+    };
+
+    return rp.post(
+      `${this.getApiUrl()}/ajax/viewTileDetails`,
+      {
+        json: true,
+        method: 'POST',
+        form: sendData,
+        headers: {
+          cookie: config.cookie,
+          authorization: config.authorization,
+          'User-Agent': config.userAgent,
+        },
+      },
+    );
+  };
 };
 
 module.exports = new Travian();

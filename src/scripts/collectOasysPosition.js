@@ -11,14 +11,17 @@ if (!Array.isArray(oasisPosition)) {
   oasisPosition = [];
 }
 
-console.log(config);
-process.exit();
+//console.log(config);
+//process.exit();
 
-const startX = Math.min(config.coordinates.minX, config.coordinates.maxX);
-const endX = Math.max(config.minX, config.maxX);
+util.checkConfiguration();
 
-const startY = Math.min(config.minY, config.maxY);
-const endY = Math.max(config.minY, config.maxY);
+
+const startX = Math.min(+config.coordinates.minX, +config.coordinates.maxX);
+const endX = Math.max(+config.coordinates.minX, +config.coordinates.maxX);
+
+const startY = Math.min(+config.coordinates.minY, +config.coordinates.maxY);
+const endY = Math.max(+config.coordinates.minY, +config.coordinates.maxY);
 
 for (let x = startX; x < endX; x++) {
   for (let y = startY; y < endY; y++) {
@@ -36,7 +39,7 @@ for (let x = startX; x < endX; x++) {
             y,
           });
 
-          jsonfile.writeFileSync(config.jsonFileOasis, oasisPosition);
+          jsonfile.writeFileSync(config.jsonFile.oasis, oasisPosition);
         }
       })
       .catch((err) => {
@@ -48,6 +51,6 @@ for (let x = startX; x < endX; x++) {
         process.exit(1);
       });
 
-    sleep(util.randomIntFromInterval(config.delayMin, config.delayMax));
+    sleep(util.randomIntFromInterval(+config.delay.min, +config.delay.max));
   }
 }

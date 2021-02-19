@@ -4,6 +4,7 @@
   "dependencies": {
     "cheerio": "latest",
     "delay": "^4.3.0",
+    "dot-object": "^2.1.4",
     "dotenv": "^8.2.0",
     "excel4node": "^1.6.0",
     "jsonfile": "^4.0.0",
@@ -16,9 +17,11 @@
   },
   "author": "Myhkavko Ivan",
   "scripts": {
+    "preinstal": "cp .env.example .env && cp src/config/cookie.txt.example src/config/cookie.txt",
+    "preinstal-windows": "copy .env.example .env & copy src\\config\\cookie.txt.example src\\config\\cookie.txt",
+    "clean": "node src/scripts/cleanData.js",
     "collect": "node src/scripts/collectOasysPosition.js",
     "find": "node src/scripts/findAnimal.js",
-    "clean": "node src/scripts/cleanData.js",
     "lint": "eslint --fix --ext .js src/",
     "test": "echo \"No test specified\"",
     "postinstall": "link-module-alias"
