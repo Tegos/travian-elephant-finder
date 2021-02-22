@@ -11,9 +11,6 @@ if (!Array.isArray(oasisPosition)) {
   oasisPosition = [];
 }
 
-//console.log(config);
-//process.exit();
-
 util.checkConfiguration();
 
 
@@ -43,7 +40,7 @@ for (let x = startX; x < endX; x++) {
         }
       })
       .catch((err) => {
-        if (err.response.statusCode === 401) {
+        if (err.response.status === 401) {
           console.error('You had provided bad credentials');
         } else {
           console.warn(err);

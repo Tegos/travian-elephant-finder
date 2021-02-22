@@ -2,6 +2,7 @@
   "name": "travian-elephant",
   "version": "0.0.1",
   "dependencies": {
+    "axios": "^0.21.1",
     "cheerio": "latest",
     "delay": "^4.3.0",
     "dot-object": "^2.1.4",
@@ -11,8 +12,6 @@
     "lodash": "^4",
     "mkdirp": "latest",
     "node-unique-array": "0.0.6",
-    "request": "latest",
-    "request-promise": "^4.2.2",
     "system-sleep": "latest"
   },
   "author": "Myhkavko Ivan",
