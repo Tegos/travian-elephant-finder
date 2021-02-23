@@ -13,7 +13,6 @@ if (!Array.isArray(oasisPosition)) {
 
 util.checkConfiguration();
 
-
 const startX = Math.min(+config.coordinates.minX, +config.coordinates.maxX);
 const endX = Math.max(+config.coordinates.minX, +config.coordinates.maxX);
 
@@ -22,11 +21,13 @@ const endY = Math.max(+config.coordinates.minY, +config.coordinates.maxY);
 
 for (let x = startX; x < endX; x++) {
   for (let y = startY; y < endY; y++) {
-    travian.viewTileDetails(x, y)
-      .then((r) => {
-        const data = r.html;
 
-        const $ = cheerio.load(data);
+    travian.viewTileDetails(x, y)
+      .then(function (response) {
+        const responseData = response.data;
+        const html = responseData.html;
+
+        const $ = cheerio.load(html);
 
         const tileDetails = $('#tileDetails');
         const className = tileDetails.attr('class');
@@ -39,13 +40,9 @@ for (let x = startX; x < endX; x++) {
           jsonfile.writeFileSync(config.jsonFile.oasis, oasisPosition);
         }
       })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          console.error('You had provided bad credentials');
-        } else {
-          console.warn(err);
-        }
-        process.exit(1);
+      .catch(function (err) {
+        console.log(err);
+        process.exit();
       });
 
     sleep(util.randomIntFromInterval(+config.delay.min, +config.delay.max));

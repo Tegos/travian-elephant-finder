@@ -4,14 +4,9 @@ const dot = require('dot-object');
 
 dotenv.config();
 
-const token = String(fs.readFileSync('src/config/token.txt'));
-
-
 const config = {
   authorization: {
     cookie: String(fs.readFileSync('src/config/cookie.txt')),
-    token,
-    ajaxHeader: `Bearer ${token}`
   },
 
   travian: {
@@ -40,8 +35,21 @@ const config = {
   },
 };
 
-config.get = function (option) {
+config.getToken = function getToken() {
+  return String(fs.readFileSync('src/config/token.txt'));
+};
+
+config.getBearerHeader = function getBearerHeader() {
+  const token = this.getToken();
+  return `Bearer ${token}`;
+};
+
+config.get = function get(option) {
   return dot.pick(option, this);
+};
+
+config.setToken = function setToken(token) {
+  fs.writeFileSync('src/config/token.txt', token);
 };
 
 module.exports = config;
