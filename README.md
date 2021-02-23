@@ -4,8 +4,7 @@
 
 The tool for analysis oases (free or occupied) and searching animals (Elephant and etc).
 
-
-Tested in **Shadow Empires**, **Fire and Sand** and **Legends**.
+Tested in **Shadow Empires**, **Fire and Sand** and **Legends (4)**.
 
 <p align="center">
 <img src="public/fire_and_sand.png" alt="fire_and_sand"/><br/>
@@ -13,64 +12,57 @@ Tested in **Shadow Empires**, **Fire and Sand** and **Legends**.
 <img src="public/shadow_empires_logo.png" alt="legends_logo_black"/>
 </p>
 
-
-## Feature: Using login/password instead cookies
-
-This feature will allow add new functionality such token renew etc.
-
-Do you agree?
-
-[![](https://api.gh-polls.com/poll/01EVTTCW09G0WD12P949RQ9ANX/Yes)](https://api.gh-polls.com/poll/01EVTTCW09G0WD12P949RQ9ANX/Yes/vote)
-[![](https://api.gh-polls.com/poll/01EVTTCW09G0WD12P949RQ9ANX/No)](https://api.gh-polls.com/poll/01EVTTCW09G0WD12P949RQ9ANX/No/vote)
-
 ## How to use
+
+## Setup
+
+- clone the repo
+- install the dependencies, `yarn install`
+- run `npm run preinstal` or `npm run preinstal-windows`
+- you should probably register new fake account for these manipulations.
 
 ## Config
 
-Set correct fields in `config.js` 
+Set correct configuration in:
 
-### authorization
+- `src/config/.env` file
+- `src/config/cookie.text` file
 
-1. Open map, https://ts6.travian.com/karte.php
+### cookie
+
+1. Open map, https://your-game-world.travian.com/karte.php
 
     <img src="public/map.png" alt="map"/>
 
-2. Open DevTools(F12 Chrome),  Network tab’s,  filter by XHR:
+2. Open DevTools(F12 Chrome), Network tab’s, filter by XHR:
 
     <img src="public/dev_tools.png" alt="dev_tools"/>
-    
-3. Select random request from list (F5 if it’s empty) and copy **authorization** from request:
-    
-    <img src="public/authorization.png" alt="authorization"/>
-    
-### cookie
 
-Copy your cookies from request(like authorization):
+3. Select random request from list (F5 if it’s empty) and copy **cookie** from request:
 
-<img src="public/cookies.png" alt="cookies"/>
+   <img src="public/cookies.png" alt="cookies"/>
 
-### minX, minY
+4. Insert selected cookie value into `src/config/cookie.text` file
+
+### MIN_X, MIN_Y
 
 The Top Left Corner Co-Ordinate of the Map Area to be searched.
 
-### maxX, maxY
+### MAX_X, MAX_Y
 
 The Bottom Right Corner Co-Ordinate of the Map Area to be searched.
 
-### startX, startY
+### START_X, START_Y
 
 Position of search (your village or cap, probably), calculate distance (for sorting oases closest to you)
 
 <img src="public/map_min_max.png" alt="map_min_max"/>
 
-## Install
-Run `yarn install` for installation package dependencies.
-
 ## Start
 
-Run command `npm run clean` clean data directory and create files.
-After that run `npm run collect` (collecting oases position) and wait… 
-It will take a lot of time (depends on your config (minMap, maxMap, delayMin, delayMax) etc).
+Run command `npm run clean` clean data directory and create files. After that run `npm run collect` (collecting oases
+position) and wait… It will take a lot of time (depends on your config (MIN_X, MIN_Y, MAX_X, MAX_Y, DELAY_MIN,
+DELAY_MAX) etc).
 
 <img src="public/npm_collect.png" alt="npm_collect"/>
 
@@ -89,18 +81,23 @@ Result in excel file: `data/elephant_*.xlsx`
 
 <img src="public/result_oasis.png" alt="result_oasis"/>
 
-
 ## Technologies:
 
-
- - **JavaScript**;
- - **NodeJS**;
- - **Cheerio**.
+- **JavaScript**;
+- **NodeJS**;
+- **Axios**;
+- **Cheerio**.
 
 ## Author
 
-*  [**Mykhavko Ivan**](https://github.com/Tegos)
+* [**Mykhavko Ivan**](https://github.com/Tegos)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+## Disclaimer
+
+_Please note that this is a research project, I am by no means responsible for any usage of this tool._  
+_Use on your own behalf, I am also not responsible if your accounts get banned due to extensive use of this tool._
+

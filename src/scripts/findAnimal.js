@@ -3,9 +3,9 @@ const cheerio = require('cheerio');
 const sleep = require('system-sleep');
 const jsonfile = require('jsonfile');
 const NodeUnique = require('node-unique-array');
-const config = require('./config');
-const util = require('./util');
-const travian = require('./travian');
+const config = require('~src/config');
+const util = require('~src/services/util');
+const travian = require('~src/services/travian');
 
 const workbook = new excel.Workbook();
 const worksheet = workbook.addWorksheet('Sheet 1', {});
@@ -25,9 +25,9 @@ worksheet.cell(1, 6)
 worksheet.cell(1, 7)
   .string('totalAnimal');
 
-let oasisPositions = jsonfile.readFileSync(config.jsonFileOasis);
+let oasisPositions = jsonfile.readFileSync(config.jsonFile.oasis);
 
-let oasisPositionsOccupiedArray = jsonfile.readFileSync(config.jsonFileOasisOccupied);
+let oasisPositionsOccupiedArray = jsonfile.readFileSync(config.jsonFile.oasisOccupied);
 
 if (!Array.isArray(oasisPositionsOccupiedArray)) {
   oasisPositionsOccupiedArray = [];
@@ -48,7 +48,7 @@ oasisPositions = oasisPositions.filter((position) => {
 
 oasisPositions.map((obj) => {
   const rObj = obj;
-  rObj.distance = util.distance(obj.x, obj.y, config.startX, config.startY);
+  rObj.distance = util.distance(obj.x, obj.y, config.coordinates.startX, config.coordinates.startY);
   return rObj;
 });
 
@@ -64,7 +64,10 @@ const file = `data/elephant_${fileNameAdd}.xlsx`;
 util.createFile(file);
 
 for (let pos = 0; pos < oasisPositions.length; pos++) {
-  const { x, y } = oasisPositions[pos];
+  const {
+    x,
+    y,
+  } = oasisPositions[pos];
 
   travian.viewTileDetails(x, y)
     .then((r) => {
@@ -84,7 +87,7 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
       let anotherAnimal = 0;
       let totalAnimal = 0;
 
-      if (td.length) {
+      if (td.length > 0) {
         anotherAnimal = trCount.length - 1;
         const tr = td.closest('tr');
         amount = parseInt(tr.find('.val')
@@ -125,18 +128,15 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
       }
 
       // save occupied
-      const h1 = $('h1')
-        .first()
-        .text()
-        .trim();
+      const tileDetails = $('#tileDetails')
+        .first();
 
-      // todo unify condition, need to test
-      if (!h1.includes('Unoccupied') && !h1.includes('Свободный')) {
+      if (tileDetails.hasClass('oasis-3')) {
         uniquePositionOccupied.add({
           x,
           y,
         });
-        jsonfile.writeFileSync(config.jsonFileOasisOccupied, uniquePositionOccupied.get());
+        jsonfile.writeFileSync(config.jsonFile.oasisOccupied, uniquePositionOccupied.get());
       }
     })
     .catch((err) => {
@@ -144,7 +144,7 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
       process.exit(1);
     });
 
-  sleep(util.randomIntFromInterval(config.delayMin, config.delayMax));
+  sleep(util.randomIntFromInterval(config.delay.min, config.delay.max));
 }
 
 console.log(`${oasisPositions.length} oases processed`);

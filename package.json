@@ -2,28 +2,37 @@
   "name": "travian-elephant",
   "version": "0.0.1",
   "dependencies": {
+    "axios": "^0.21.1",
     "cheerio": "latest",
     "delay": "^4.3.0",
+    "dot-object": "^2.1.4",
+    "dotenv": "^8.2.0",
     "excel4node": "^1.6.0",
     "jsonfile": "^4.0.0",
     "lodash": "^4",
     "mkdirp": "latest",
     "node-unique-array": "0.0.6",
-    "request": "latest",
-    "request-promise": "^4.2.2",
     "system-sleep": "latest"
   },
   "author": "Myhkavko Ivan",
   "scripts": {
-    "collect": "node collectOasysPosition.js",
-    "find": "node findAnimal.js",
-    "clean": "node cleanData.js",
-    "lint": "eslint --fix --ext .js .",
-    "test": "echo \"No test specified\""
+    "preinstal": "cp .env.example .env && cp src/config/cookie.txt.example src/config/cookie.txt",
+    "preinstal-windows": "copy .env.example .env & copy src\\config\\cookie.txt.example src\\config\\cookie.txt",
+    "clean": "node src/scripts/cleanData.js",
+    "collect": "node src/scripts/collectOasysPosition.js",
+    "find": "node src/scripts/findAnimal.js",
+    "lint": "eslint --fix --ext .js src/",
+    "test": "echo \"No test specified\"",
+    "postinstall": "link-module-alias"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint-plugin-import": "^2.20.2",
+    "link-module-alias": "^1.2.0"
+  },
+  "_moduleAliases": {
+    "~root": ".",
+    "~src": "src/"
   }
 }

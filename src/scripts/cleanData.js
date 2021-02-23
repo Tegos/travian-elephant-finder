@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const jsonfile = require('jsonfile');
-const config = require('./config');
+const config = require('~src/config');
 
 const directory = 'data';
 
@@ -16,11 +16,11 @@ fs.readdir(directory, (readErr, files) => {
     });
   });
 
-  fs.createWriteStream(config.jsonFileOasis);
-  fs.createWriteStream(config.jsonFileOasisOccupied);
+  fs.createWriteStream(config.jsonFile.oasis);
+  fs.createWriteStream(config.jsonFile.oasisOccupied);
 
-  jsonfile.writeFileSync(config.jsonFileOasis, []);
-  jsonfile.writeFileSync(config.jsonFileOasisOccupied, []);
+  jsonfile.writeFileSync(config.jsonFile.oasis, []);
+  jsonfile.writeFileSync(config.jsonFile.oasisOccupied, []);
 });
 
 console.log(`Directory ${directory} cleaned`);
