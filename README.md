@@ -85,7 +85,7 @@ Result in excel file: `data/elephant_*.xlsx`
 
 - **JavaScript**;
 - **NodeJS**;
-- **Axios**.
+- **Axios**;
 - **Cheerio**.
 
 ## Author
