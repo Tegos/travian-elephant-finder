@@ -24,7 +24,28 @@ const createFile = (filename) => {
   });
 };
 
-const checkConfiguration = () => {
+/**
+ * Checks if a JavaScript value is empty
+ * @example
+ *    isEmpty(null); // true
+ *    isEmpty(undefined); // true
+ *    isEmpty(''); // true
+ *    isEmpty([]); // true
+ *    isEmpty({}); // true
+ * @param {any} value - item to test
+ * @returns {boolean} true if empty, otherwise false
+ */
+const isEmpty = function isEmpty(value) {
+  return (
+    value === null // check for null
+    || value === undefined // check for undefined
+    || value === '' // check for empty string
+    || (Array.isArray(value) && value.length === 0) // check for empty array
+    || (typeof value === 'object' && Object.keys(value).length === 0) // check for empty object
+  );
+};
+
+const checkConfiguration = function checkConfiguration() {
   const requiredOptions = [
     'authorization.cookie',
     'travian.server',
@@ -38,7 +59,8 @@ const checkConfiguration = () => {
 
   const emptyConfigOptions = [];
 
-  for (const option of requiredOptions) {
+  for (let i = 0; i < requiredOptions.length; i++) {
+    const option = requiredOptions[i];
     if (isEmpty(config.get(option))) {
       emptyConfigOptions.push(option);
     }
@@ -48,27 +70,6 @@ const checkConfiguration = () => {
     console.warn(`You must provide correct configuration for this option: ${emptyConfigOptions}`);
     process.exit();
   }
-};
-
-/**
- * Checks if a JavaScript value is empty
- * @example
- *    isEmpty(null); // true
- *    isEmpty(undefined); // true
- *    isEmpty(''); // true
- *    isEmpty([]); // true
- *    isEmpty({}); // true
- * @param {any} value - item to test
- * @returns {boolean} true if empty, otherwise false
- */
-const isEmpty = function (value) {
-  return (
-    value === null // check for null
-    || value === undefined // check for undefined
-    || value === '' // check for empty string
-    || (Array.isArray(value) && value.length === 0) // check for empty array
-    || (typeof value === 'object' && Object.keys(value).length === 0) // check for empty object
-  );
 };
 
 exports.distance = distance;

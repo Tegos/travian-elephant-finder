@@ -21,11 +21,10 @@ const endY = Math.max(+config.coordinates.minY, +config.coordinates.maxY);
 
 for (let x = startX; x < endX; x++) {
   for (let y = startY; y < endY; y++) {
-
     travian.viewTileDetails(x, y)
-      .then(function (response) {
+      .then((response) => {
         const responseData = response.data;
-        const html = responseData.html;
+        const { html } = responseData;
 
         const $ = cheerio.load(html);
 
@@ -40,7 +39,7 @@ for (let x = startX; x < endX; x++) {
           jsonfile.writeFileSync(config.jsonFile.oasis, oasisPosition);
         }
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log(err);
         process.exit();
       });

@@ -8,28 +8,32 @@ axiosApiInstance.defaults.withCredentials = true;
 
 // Request interceptor for API calls
 axiosApiInstance.interceptors.request.use((AxiosConfig) => {
-  AxiosConfig.headers = {
+  const newAxiosConfig = AxiosConfig;
+  newAxiosConfig.headers = {
     cookie: config.authorization.cookie,
     Authorization: config.getBearerHeader(),
     'User-Agent': config.userAgent,
   };
 
-  return AxiosConfig;
+  return newAxiosConfig;
 }, (error) => Promise.reject(error));
 
 // Response interceptor for API calls
-axiosApiInstance.interceptors.response.use((response) => response, async (error) => {
-  const originalRequest = error.config;
-  if (error.response.status === 401 && !originalRequest._retry) {
-    originalRequest._retry = true;
-    await auth.refreshToken();
-    axiosApiInstance.defaults.headers = {
-      Authorization: config.getBearerHeader(),
-    };
-    console.log(config.getBearerHeader());
-    return axiosApiInstance(originalRequest);
-  }
-  return Promise.reject(error);
-});
+axiosApiInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest.isRetry) {
+      originalRequest.isRetry = true;
+      await auth.refreshToken();
+      axiosApiInstance.defaults.headers = {
+        Authorization: config.getBearerHeader(),
+      };
+      console.log(config.getBearerHeader());
+      return axiosApiInstance(originalRequest);
+    }
+    return Promise.reject(error);
+  },
+);
 
 module.exports = axiosApiInstance;
