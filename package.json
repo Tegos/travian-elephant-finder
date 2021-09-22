@@ -2,7 +2,7 @@
   "name": "travian-elephant",
   "version": "0.0.1",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "cheerio": "latest",
     "delay": "^4.3.0",
     "dot-object": "^2.1.4",
