@@ -25,8 +25,8 @@ Tested in **Shadow Empires**, **Fire and Sand** and **Legends (4)**.
 
 Set correct configuration in:
 
-- `src/config/.env` file
-- `src/config/cookie.text` file
+- `.env` file
+- `src/config/cookie.txt` file
 
 ### cookie
 
