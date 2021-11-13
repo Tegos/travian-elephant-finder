@@ -24,7 +24,7 @@ const Travian = function Travian() {
     };
 
     return axiosApiInstance.post(
-      `${this.getApiUrl()}/ajax/viewTileDetails`,
+      `${this.getApiUrl()}/map/tile-details`,
       sendData,
     );
   };

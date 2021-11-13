@@ -71,7 +71,7 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
 
   travian.viewTileDetails(x, y)
     .then((r) => {
-      const data = r.html;
+      const data = r.data.html;
       let amount = 0;
 
       const $ = cheerio.load(data);
