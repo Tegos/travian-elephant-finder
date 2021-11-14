@@ -3,9 +3,12 @@ const cheerio = require('cheerio');
 const sleep = require('system-sleep');
 const jsonfile = require('jsonfile');
 const NodeUnique = require('node-unique-array');
+const cliProgress = require('cli-progress');
 const config = require('~src/config');
 const util = require('~src/services/util');
 const travian = require('~src/services/travian');
+
+const bar = new cliProgress.Bar();
 
 const workbook = new excel.Workbook();
 const worksheet = workbook.addWorksheet('Sheet 1', {});
@@ -62,6 +65,8 @@ const fileNameAdd = `${date.toLocaleDateString()}_${date.getTime()}`;
 const file = `data/elephant_${fileNameAdd}.xlsx`;
 
 util.createFile(file);
+
+bar.start(oasisPositions.length, 0);
 
 for (let pos = 0; pos < oasisPositions.length; pos++) {
   const {
@@ -138,6 +143,7 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
         });
         jsonfile.writeFileSync(config.jsonFile.oasisOccupied, uniquePositionOccupied.get());
       }
+      bar.increment();
     })
     .catch((err) => {
       console.warn(err);
@@ -146,5 +152,7 @@ for (let pos = 0; pos < oasisPositions.length; pos++) {
 
   sleep(util.randomIntFromInterval(config.delay.min, config.delay.max));
 }
+
+bar.stop();
 
 console.log(`${oasisPositions.length} oases processed`);

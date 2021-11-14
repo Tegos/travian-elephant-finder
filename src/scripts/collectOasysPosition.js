@@ -1,9 +1,12 @@
 const cheerio = require('cheerio');
 const sleep = require('system-sleep');
 const jsonfile = require('jsonfile');
+const cliProgress = require('cli-progress');
 const config = require('~src/config');
 const util = require('~src/services/util');
 const travian = require('~src/services/travian');
+
+const bar = new cliProgress.Bar();
 
 let oasisPosition = jsonfile.readFileSync(config.jsonFile.oasis);
 
@@ -18,6 +21,9 @@ const endX = Math.max(+config.coordinates.minX, +config.coordinates.maxX);
 
 const startY = Math.min(+config.coordinates.minY, +config.coordinates.maxY);
 const endY = Math.max(+config.coordinates.minY, +config.coordinates.maxY);
+
+const totalFields = (endX - startX) * (endY - startY);
+bar.start(totalFields, 0);
 
 for (let x = startX; x < endX; x++) {
   for (let y = startY; y < endY; y++) {
@@ -38,6 +44,8 @@ for (let x = startX; x < endX; x++) {
 
           jsonfile.writeFileSync(config.jsonFile.oasis, oasisPosition);
         }
+
+        bar.increment();
       })
       .catch((err) => {
         console.log(err);
@@ -47,3 +55,5 @@ for (let x = startX; x < endX; x++) {
     sleep(util.randomIntFromInterval(+config.delay.min, +config.delay.max));
   }
 }
+
+bar.stop();

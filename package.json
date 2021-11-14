@@ -1,9 +1,10 @@
 {
   "name": "travian-elephant",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "dependencies": {
     "axios": "~0.21.2",
     "cheerio": "latest",
+    "cli-progress": "^3.9.1",
     "delay": "^4.3.0",
     "dot-object": "^2.1.4",
     "dotenv": "^8.2.0",
@@ -26,7 +27,7 @@
     "postinstall": "link-module-alias"
   },
   "devDependencies": {
-    "eslint": "latest",
+    "eslint": "^6",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "link-module-alias": "^1.2.0"
