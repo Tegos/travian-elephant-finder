@@ -60,15 +60,15 @@ Position of search (your village or cap, probably), calculate distance (for sort
 
 ## Start
 
-Run command `npm run clean` clean data directory and create files. After that run `npm run collect` (collecting oases
-position) and wait… It will take a lot of time (depends on your config (MIN_X, MIN_Y, MAX_X, MAX_Y, DELAY_MIN,
-DELAY_MAX) etc).
+- `npm run clean` - command clean data directory and create files
+- `npm run collect` - (collecting oases position) and wait… It will take a lot of time (depends on your config (MIN_X,
+  MIN_Y, MAX_X, MAX_Y, DELAY_MIN, DELAY_MAX) etc)
 
-<img src="public/npm_collect.png" alt="npm_collect"/>
+<img src="public/collect.png" alt="collect"/>
 
-After execution `npm run collect` run  `npm run find`.
+- `npm run find` - find animals in oases
 
-<img src="public/npm_find.png" alt="npm_find"/>
+<img src="public/find-process.png" alt="find-process"/>
 
 Result in excel file: `data/elephant_*.xlsx`
 
