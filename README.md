@@ -1,4 +1,4 @@
-# Travian Animals Finder
+# Travian Elephants Finder
 
 <img src="public/nature.png" alt="nature"/><br/>
 
