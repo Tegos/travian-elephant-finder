@@ -16,9 +16,6 @@ fs.readdir(directory, (readErr, files) => {
     });
   });
 
-  // fs.createWriteStream(config.jsonFile.oasis);
-  // fs.createWriteStream(config.jsonFile.oasisOccupied);
-
   jsonfile.writeFileSync(config.jsonFile.oasis, []);
   jsonfile.writeFileSync(config.jsonFile.oasisOccupied, []);
 });
